@@ -1,0 +1,708 @@
+<?php if ($scheduleData !== null): ?>
+                        <?php foreach ($scheduleData as $schedule): ?>
+                            <tr>
+                                <td data-label="Column_lesson"><?= Html::encode($schedule->lesson) ?></td>
+                                <td data-label="Column_Monday"><?= $schedule->day_of_week === 'Monday' ? Html::encode($schedule->curriculumData->subject->subject) : '' ?></td>
+                                <td data-label="Column_Tuesday"><?= $schedule->day_of_week === 'Tuesday' ? Html::encode($schedule->curriculumData->subject->subject) : '' ?></td>
+                                <td data-label="Column_Wednesday"><?= $schedule->day_of_week === 'Wednesday' ? Html::encode($schedule->curriculumData->subject->subject) : '' ?></td>
+                                <td data-label="Column_Thursday"><?= $schedule->day_of_week === 'Thursday' ? Html::encode($schedule->curriculumData->subject->subject) : '' ?></td>
+                                <td data-label="Column_Friday"><?= $schedule->day_of_week === 'Friday' ? Html::encode($schedule->curriculumData->subject->subject) : '' ?></td>
+                                <td data-label="Column_Saturday"><?= $schedule->day_of_week === 'Saturday' ? Html::encode($schedule->curriculumData->subject->subject) : '' ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                        <tr>
+                            <td colspan="7">There is no schedule for this group.</td>
+                        </tr>
+                    <?php endif; ?>
+
+
+                    
+<body>
+    <div class="login">
+        <h1>Sign In</h1>
+        <form  class="group" novalidate="false" >
+            <label>Login</label>
+            <input type="text" name="username" required="" >
+            <label>Password</label>
+            <input type="password" placeholder="">
+            <input type="submit" value="Submit">
+        </form>
+        <p>
+            If u have some trouble, contact with admin
+        </p>
+    </div>
+</body>
+
+CREATE TABLE users.users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL
+);
+
+INSERT INTO users.users (username, password_hash)
+VALUES ('admin', crypt('123', gen_salt('bf')));
+
+
+<tr>
+                        <td data-label="Column_lesson">1 Lesson</td>
+                        <td data-label="Column_Monday"></td>
+                        <td data-label="Column_Tuesday">Here we go again</td>
+                        <td data-label="Column_Wednesday">Boring</td>
+                        <td data-label="Column_Thursday">Almost Friday</td>
+                        <td data-label="Column_Friday">Last day</td>
+                        <td data-label="Column_Saturday">Yeeeeaaahhh</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Column_lesson">2 Lesson</td>
+                        <td data-label="Column_Monday">Oh no...</td>
+                        <td data-label="Column_Tuesday">Here we go again</td>
+                        <td data-label="Column_Wednesday">Boring</td>
+                        <td data-label="Column_Thursday">Almost Friday</td>
+                        <td data-label="Column_Friday">Last day</td>
+                        <td data-label="Column_Saturday">Yeeeeaaahhh</td>
+                    </tr>
+                    <!-- Add more static table rows if needed -->
+
+                    
+
+                    CREATE OR REPLACE FUNCTION public.teacher_load(
+    teacher_id integer,
+    load_year integer)
+RETURNS TABLE (subject text, group_name text, weeks integer, hours_per_week integer, total_hours integer) 
+LANGUAGE 'plpgsql'
+VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    RETURN QUERY
+    SELECT s.subject, g.name AS group_name, cd.weeks, cd.hours_per_week, (cd.weeks * cd.hours_per_week) AS total_hours
+    FROM teacher t
+    INNER JOIN curriculum_data cd ON t.id_teacher = cd.id_teacher
+    INNER JOIN subject s ON cd.subject_id = s.subject_id
+    INNER JOIN schedule sch ON cd.id_of_curriculum_data = sch.id_of_curriculum_data
+    INNER JOIN groups g ON sch.id_group = g.id_group
+    WHERE t.id_teacher = teacher_id AND cd.year = load_year;
+
+END;
+$BODY$;
+
+
+
+
+ <div class="edit-container">
+
+    <form action="#">
+        
+            <div class="user-details">
+                
+                <h1 class="lesson">1</h1>
+                    <div class="input-box">
+                        <h1 class="scform-days">Monday</h1>
+                        <span class="details">First lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    
+                    <div class="input-box">
+                        <h1 class="scform-days">Tuesday</h1>
+                        <span class="details">First lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <h1 class="scform-days">Wednesday</h1>
+                        <span class="details">First lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <h1 class="scform-days">Thursday</h1>
+                        <span class="details">First lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <h1 class="scform-days">Friday</h1>
+                        <span class="details">First lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                
+            </div>
+            
+            <div class="user-details">
+                <h1 class="lessons">2</h1>
+                    <div class="input-box">
+                        <span class="details">Second lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Second lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Second lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Second lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Second lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+            </div>
+
+            <div class="user-details">
+                <h1 class="lessons">3</h1>
+                    <div class="input-box">
+                        <span class="details">Third lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        
+                        <span class="details">Third lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Third lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Third lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Third lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+            </div>
+         
+            
+            <div class="user-details">
+                <h1 class="lessons">4</h1>
+                    <div class="input-box">
+                        <span class="details">Forth lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Forth lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Forth lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        
+                        <span class="details">Forth lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Forth lesson</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <?php
+use app\models\Speciality;
+use app\models\Group;
+use yii\helpers\Html;
+?>
+
+
+<div class="head-container">
+   
+    <div class="scform-align">        
+            <label for="specialties">Specialties:</label>
+        <select id="specialties" name="specialties">
+                <option value="cs">Computer Science</option>
+                <option value="eng">Engineering</option>
+                <option value="bus">Business</option>
+                <option value="health">Health Sciences</option>
+        </select>
+    </div>
+
+    <div class="scform-align">
+    <label for="groups">Teacher</label>
+    <select id="groups" name="groups">
+        <?php foreach ($teachers as $teacher): ?>
+            <option value="<?= Html::encode($teacher->id_teacher) ?>">
+                <?= Html::encode($teacher->name) ?> <?= Html::encode($teacher->surname) ?> <?= Html::encode($teacher->patronymic) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    </div>
+
+
+    <div class="scform-button">
+    <button type="submit" > Search </button>
+    </div>
+                   
+</div>
+<?php
+$specialities = Speciality::find()->all();
+$groups = Group::find()->all();
+var_dump(is_array($specialities));
+var_dump(is_array($groups));
+?>
+<div class="center-heading">
+    <h1 class="scform-head">Load Edition</h1>
+</div>
+ <div class="edit-container">
+
+    <form action="#">
+        
+            <div class="user-details">
+                
+                <h1 class="lesson">1</h1>
+                    <div class="input-box">
+                        <h1 class="scform-days">Disciplines</h1>
+                        <span class="details">Discipline</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    
+                    <div class="input-box">
+                        <h1 class="scform-days">Group</h1>
+                        <span class="details">Group</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <h1 class="scform-days">Weeks</h1>
+                        <span class="details">Week</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <h1 class="scform-days">Hours per week</h1>
+                        <span class="details">Hours per week</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <h1 class="scform-days">Total of semester</h1>
+                        <span class="details">Total of semester</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                
+            </div>
+            
+            <div class="user-details">
+                <h1 class="lessons">2</h1>
+                    <div class="input-box">
+                        <span class="details">Discipline</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Group</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Week</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Hours per week</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Total of semester</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+            </div>
+
+            <div class="user-details">
+                <h1 class="lessons">3</h1>
+                    <div class="input-box">
+                        <span class="details">Discipline</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        
+                        <span class="details">Group</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Week</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Hours per week</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Total of semester</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+            </div>
+         
+            
+            <div class="user-details">
+                <h1 class="lessons">4</h1>
+                    <div class="input-box">
+                        <span class="details">Discipline</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Group</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Week</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        
+                        <span class="details">Hours per week</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Total of semester</span>
+                        <input type="text" placeholder="" required>
+                    </div>
+            </div>
+            
+    <div class="scform-submit">
+    <button type="submit" >Save</button>
+    </div>
+        
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ private function getDeletedSubjects($currentScheduleData, $newScheduleData)
+    {
+        $deletedSubjects = [];
+
+        foreach ($currentScheduleData as $currentRow) {
+            $subjectExists = false;
+            foreach ($newScheduleData as $newRow) {
+                if ($currentRow == $newRow) {
+                    $subjectExists = true;
+                    break;
+                }
+            }
+            if (!$subjectExists) {
+                $deletedSubjects[] = $currentRow['Monday'];
+            }
+        }
+
+        return $deletedSubjects;
+    }
+
+    private function deleteSubjectFromSchedule($groupId, $subject)
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("DELETE FROM schedule WHERE id_group = :groupId AND subject = :subject");
+        $command->bindValue(':groupId', $groupId);
+        $command->bindValue(':subject', $subject);
+        $command->execute();
+    }
+
+    private function saveSubjectToSchedule($groupId, $dayOfWeek, $lesson, $subject)
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("INSERT INTO schedule (group_id, day_of_week, lesson, subject) VALUES (:groupId, :dayOfWeek, :lesson, :subject)");
+        $command->bindValue(':groupId', $groupId);
+        $command->bindValue(':dayOfWeek', $dayOfWeek);
+        $command->bindValue(':lesson', $lesson);
+        $command->bindValue(':subject', $subject);
+        $command->execute();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <?php
+
+namespace app\controllers;
+
+use Yii;
+use yii\web\Controller;
+use app\models\Group;
+use app\models\Speciality;
+use yii\helpers\Html;
+use app\models\Schedule;
+
+class ScformController extends Controller
+{
+    private $currentScheduleData;
+    private $selectedGroupId;
+
+    public function actionIndex()
+    {
+        $groups = Group::find()->all();
+        $displayData = $this->prepareDisplayData([]);
+        
+        return $this->render('index', [
+            'groups' => $groups,
+            'displayData' => $displayData,
+        ]);
+    }
+
+    public function actionSearchSchedule()
+    {
+        $groupId = Yii::$app->request->post('groups');
+        $group = Group::findOne($groupId);
+    
+        if ($group !== null) {
+            $scheduleData = $this->getScheduleData($group->name);
+            $displayData = $this->prepareDisplayData($scheduleData);
+            $currentScheduleData = $this->prepareCurrentScheduleData($scheduleData);
+            $this->selectedGroupId = $groupId;
+    
+            // Store current schedule data in session
+            $this->storeCurrentScheduleData($groupId, $currentScheduleData);
+    
+            Yii::info('Display Data: ' . print_r($displayData, true), 'application');
+            Yii::info('Current Schedule Data: ' . print_r($currentScheduleData, true), 'application');
+    
+            return $this->render('index', [
+                'groups' => Group::find()->all(),
+                'displayData' => $displayData,
+                'selectedGroup' => $groupId,
+                'currentScheduleData' => $currentScheduleData,
+            ]);
+        }
+    
+        Yii::$app->session->setFlash('error', 'Group not found.');
+        return $this->redirect(['index']);
+    }
+    
+
+    
+    
+    
+
+    private function getScheduleData($groupName)
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("
+            SELECT s.day_of_week, s.lesson, su.subject
+            FROM schedule s
+            JOIN groups g ON g.id_group = s.id_group
+            JOIN curriculum_data cd ON cd.id_of_curriculum_data = s.id_of_curriculum_data
+            JOIN subject su ON su.subject_id = cd.subject_id
+            WHERE g.name = :groupName
+        ");
+        $command->bindValue(':groupName', $groupName);
+        $scheduleData = $command->queryAll();
+        return $scheduleData;
+    }
+
+    private function prepareDisplayData($scheduleData)
+    {
+        $displayData = [];
+        $daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        for ($lessonNumber = 1; $lessonNumber <= 5; $lessonNumber++) {
+            $displayRow = ['lesson' => $lessonNumber];
+            foreach ($daysOfWeek as $dayOfWeek) {
+                $displayRow[$dayOfWeek] = Html::encode($this->getLessonSubject($dayOfWeek, $lessonNumber, $scheduleData));
+            }
+            $displayData[] = $displayRow;
+        }
+
+        return $displayData;
+    }
+
+    public function getLessonSubject($dayOfWeek, $lesson, $scheduleData)
+    {
+        foreach ($scheduleData as $schedule) {
+            if ($schedule['day_of_week'] === $dayOfWeek && $schedule['lesson'] === $lesson) {
+                return Html::encode($schedule['subject']);
+            }
+        }
+
+        return '';
+    }
+
+    public function actionSaveSchedule()
+    {
+        $groupId = Yii::$app->request->post('groupId');
+        $newScheduleData = Yii::$app->request->post('schedule');
+        $currentScheduleData = $this->getCurrentScheduleData($groupId); // Retrieve the current schedule data
+        $displayData = $this->prepareDisplayData($newScheduleData);
+    
+        $currentScheduleArray = $this->convertScheduleToArray($currentScheduleData);
+        $newScheduleArray = $this->convertScheduleToArray($newScheduleData);
+        Yii::info('Schedule has been changed. Current Schedule: ' . print_r($newScheduleArray, true), 'application');
+        Yii::info('$newScheduleArray: ' . print_r($newScheduleArray, true), 'application'); // Log the updated schedule data
+
+        if ($this->isScheduleDataChanged($currentScheduleArray, $newScheduleArray)) {
+            Yii::info('Schedule has been changed. Current Schedule: ' . print_r($newScheduleArray, true), 'application');
+            Yii::info('$newScheduleArray: ' . print_r($newScheduleArray, true), 'application'); // Log the updated schedule data
+            Yii::$app->session->setFlash('success', 'Schedule has been changed.');
+        } else {
+            Yii::info('Schedule has not been changed. Current Schedule: ' . print_r($currentScheduleArray, true), 'application');
+            Yii::$app->session->setFlash('info', 'Schedule has not been changed.');
+            //Yii::info('$newScheduleArray: ' . print_r($newScheduleArray, true), 'application');
+        }
+    
+        $this->updateScheduleData($groupId, $newScheduleData);
+    
+        // Update the current schedule data in session with the new schedule data
+        $this->storeCurrentScheduleData($groupId, $displayData);
+    
+        return $this->redirect(['index']);
+    }
+    
+
+private function convertScheduleToArray($scheduleData)
+{
+    $convertedData = [];
+
+    foreach ($scheduleData as $row) {
+        $convertedData[] = array_values($row);
+    }
+
+    return $convertedData;
+}
+
+    
+private function isScheduleDataChanged($currentScheduleData, $newScheduleData)
+{
+    $changed = false;
+    $length = count($currentScheduleData);
+
+    for ($i = 0; $i < $length; $i++) {
+        $currentRow = $currentScheduleData[$i];
+        $newRow = $newScheduleData[$i];
+
+        foreach ($currentRow as $day => $subject) {
+            if ($newRow[$day] !== $subject) {
+                $changed = true;
+                Yii::info("Comparison: Current Schedule[$i][$day] = $subject, New Schedule[$i][$day] = {$newRow[$day]}", 'application');
+            }
+        }
+    }
+
+    Yii::info('Comparison Result: Schedule ' . ($changed ? 'changed' : 'not changed'), 'application');
+    return $changed;
+}
+
+
+private function prepareCurrentScheduleData($scheduleData)
+{
+    $currentScheduleData = [];
+
+    foreach ($scheduleData as $schedule) {
+        $dayOfWeek = $schedule['day_of_week'];
+        $lessonNumber = $schedule['lesson'];
+        $subject = $schedule['subject'];
+
+        if (!isset($currentScheduleData[$lessonNumber])) {
+            $currentScheduleData[$lessonNumber] = [];
+        }
+
+        $currentScheduleData[$lessonNumber][$dayOfWeek] = $subject;
+    }
+
+    // Fill in missing lesson numbers with empty arrays
+    for ($lessonNumber = 1; $lessonNumber <= 5; $lessonNumber++) {
+        if (!isset($currentScheduleData[$lessonNumber])) {
+            $currentScheduleData[$lessonNumber] = [];
+        }
+    }
+
+    // Sort the lesson numbers in ascending order
+    ksort($currentScheduleData);
+
+    return $currentScheduleData;
+}
+
+
+
+
+
+
+    
+    private function getCurrentScheduleData($groupId)
+{
+    $currentScheduleData = Yii::$app->session->get('currentScheduleData', []);
+    return isset($currentScheduleData[$groupId]) ? $currentScheduleData[$groupId] : [];
+}
+
+    
+    private function storeCurrentScheduleData($groupId, $scheduleData)
+    {
+        $currentScheduleData = Yii::$app->session->get('currentScheduleData', []);
+        $currentScheduleData[$groupId] = $scheduleData;
+        Yii::$app->session->set('currentScheduleData', $currentScheduleData);
+    }
+
+    
+
+    
+
+    
+    private function flattenScheduleData($scheduleData)
+{
+    $flattenedData = [];
+
+    foreach ($scheduleData as $row) {
+        foreach ($row as $day => $subject) {
+            $lessonSubject = $day . '|' . $subject;
+            $flattenedData[] = $lessonSubject;
+        }
+    }
+
+    return $flattenedData;
+}
+
+    
+
+
+
+    private function updateScheduleData($groupId, $newScheduleData)
+{
+    
+}
+
+}
+
+
+
+<div class="form-group">
+                <label for="specialties">Specialties:</label>
+                <select id="specialties" name="specialties">
+                    <?php foreach ($specialities as $speciality): ?>
+                        <option value="<?= Html::encode($speciality->number_of_speciality) ?>"><?= Html::encode($speciality->speciality) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>    

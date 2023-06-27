@@ -1,0 +1,89 @@
+array(5) {
+  [0]=>
+  array(7) {
+    ["lesson"]=>
+    int(1)
+    ["Monday"]=>
+    string(0) ""
+    ["Tuesday"]=>
+    string(0) ""
+    ["Wednesday"]=>
+    string(0) ""
+    ["Thursday"]=>
+    string(0) ""
+    ["Friday"]=>
+    string(0) ""
+    ["Saturday"]=>
+    string(0) ""
+  }
+  [1]=>
+  array(7) {
+    ["lesson"]=>
+    int(2)
+    ["Monday"]=>
+    string(0) ""
+    ["Tuesday"]=>
+    string(0) ""
+    ["Wednesday"]=>
+    string(0) ""
+    ["Thursday"]=>
+    string(0) ""
+    ["Friday"]=>
+    string(0) ""
+    ["Saturday"]=>
+    string(0) ""
+  }
+  [2]=>
+  array(7) {
+    ["lesson"]=>
+    int(3)
+    ["Monday"]=>
+    string(0) ""
+    ["Tuesday"]=>
+    string(0) ""
+    ["Wednesday"]=>
+    string(0) ""
+    ["Thursday"]=>
+    string(0) ""
+    ["Friday"]=>
+    string(0) ""
+    ["Saturday"]=>
+    string(0) ""
+  }
+  [3]=>
+  array(7) {
+    ["lesson"]=>
+    int(4)
+    ["Monday"]=>
+    string(0) ""
+    ["Tuesday"]=>
+    string(0) ""
+    ["Wednesday"]=>
+    string(0) ""
+    ["Thursday"]=>
+    string(0) ""
+    ["Friday"]=>
+    string(0) ""
+    ["Saturday"]=>
+    string(0) ""
+  }
+  [4]=>
+  array(7) {
+    ["lesson"]=>
+    int(5)
+    ["Monday"]=>
+    string(0) ""
+    ["Tuesday"]=>
+    string(0) ""
+    ["Wednesday"]=>
+    string(0) ""
+    ["Thursday"]=>
+    string(0) ""
+    ["Friday"]=>
+    string(0) ""
+    ["Saturday"]=>
+    string(0) ""
+  }
+}
+array(0) {
+}
