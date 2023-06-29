@@ -36,15 +36,14 @@ class Teacher extends ActiveRecord
         $result = $command->queryAll();
         Yii::info('Result variable: ' . print_r($result, true));
         $loadData = [];
-        // Fetch the load data for the specified year and assign the values to the Teacher model properties
+
         foreach ($result as $row) {
             $loadItem = new Teacher();
-            $loadItem->subject = $row['subject']; // Assign the subject value
+            $loadItem->subject = $row['subject']; 
             $loadItem->group_name = $row['group_name']; 
             $loadItem->weeks = $row['weeks'];
             $loadItem->hours_per_week = $row['hours_per_week'];
             $loadItem->total_hours = $row['total_hours'];
-            // Assign other properties...
             $loadData[] = $loadItem;
         }
 
@@ -57,7 +56,6 @@ class Teacher extends ActiveRecord
         $loadData = [];
 
         if ($teacherId !== null) {
-            // Fetch the load data for the specified teacher
             $connection = Yii::$app->getDb();
             $command = $connection->createCommand('SELECT * FROM teacher_load(:teacher_id)');
             $command->bindParam(':teacher_id', $teacherId);

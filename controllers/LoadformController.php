@@ -55,7 +55,7 @@ class LoadformController extends Controller
             var_dump($hoursPerWeek);
 
             foreach ($disciplines as $index => $discipline) {
-                $teacherId = $postData['teacherId']; // Assuming you have a hidden input in your view with the teacher ID
+                $teacherId = $postData['teacherId']; 
                 $teacher = Teacher::findOne($teacherId);
     
                 if ($teacher !== null) {
@@ -64,19 +64,16 @@ class LoadformController extends Controller
                     var_dump($teacher->weeks);
                     var_dump($teacher->hours_per_week);
                 
-                    // Store the current attribute values for comparison
                     $oldSubject = $teacher->subject;
                     $oldGroup = $teacher->group_name;
                     $oldWeeks = $teacher->weeks;
                     $oldHoursPerWeek = $teacher->hours_per_week;
     
-                    // Update the teacher's attributes with the submitted form data
                     $teacher->subject = $discipline;
                     $teacher->group_name = $groups[$index];
                     $teacher->weeks = $weeks[$index];
                     $teacher->hours_per_week = $hoursPerWeek[$index];
     
-                    // Check if any changes were made
                     if ($teacher->subject !== $oldSubject ||
                         $teacher->group_name !== $oldGroup ||
                         $teacher->weeks !== $oldWeeks ||
@@ -84,29 +81,25 @@ class LoadformController extends Controller
                         $changesMade = true; // Changes were made
                     }
     
-                    // Save the teacher model
+
                     $teacher->save();
-    
-                    // Fetch the teacher's load data again
+
                     $loadData = $teacher->findLoadDataByTeacherId($teacherId);
-    
-                    // Find the corresponding Hours model by teacher ID
+
                     $hours = Hours::findOne(['teacher_id' => $teacher->id]);
     
                     if ($hours === null) {
-                        // If Hours model doesn't exist, create a new one
+                        
                         $hours = new Hours();
-                        $hours->teacher_id = $teacher->id; // Assuming there's a 'teacher_id' attribute in the Hours model
+                        $hours->teacher_id = $teacher->id; 
                     }
 
                     var_dump($changesMade);
-                    // Update the attributes with the submitted form data
                     $hours->type_of_lesson = $postData['type_of_lesson'][$index];
                     $hours->id_of_curriculum_data = $postData['id_of_curriculum_data'][$index];
                     $hours->hours_of_specific_type = $postData['hours_of_specific_type'][$index];
                     $hours->number_of_speciality = $postData['number_of_speciality'][$index];
-    
-                    // Save the hours model
+
                     $hours->save();
                 } else {
                     Yii::error('Selected teacher not found');
@@ -120,9 +113,8 @@ class LoadformController extends Controller
                 Yii::$app->session->setFlash('info', 'No changes were made.');
             }
         }
-    
-        // Redirect or display success message
-        return $this->redirect(['index']); // Redirect to the index page after saving
+
+        return $this->redirect(['index']); 
     }
     
     

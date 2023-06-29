@@ -16,7 +16,6 @@ class LoginController extends Controller
         $model = new \app\models\LoginForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            // User is logged in successfully
             return $this->redirect(['load/index']);
         }
 
