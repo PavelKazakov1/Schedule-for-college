@@ -60,7 +60,6 @@ use yii\helpers\Html;
         <h1 class="scform-days">Group</h1>
         <input type="text" name="groups[]" value="<?= Html::encode($loadItem->group_name) ?>" required>
     </div>
-    <!-- Add the hidden input field for teacher ID -->
     <input type="hidden" name="teacherId" value="<?= Html::encode($loadItem->id_teacher) ?>">
     <div class="input-box">
         <h1 class="scform-days">Weeks</h1>
